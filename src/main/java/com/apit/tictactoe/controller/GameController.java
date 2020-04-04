@@ -4,6 +4,7 @@ import com.apit.tictactoe.entity.GamesEntity;
 import com.apit.tictactoe.request.MoveRequest;
 import com.apit.tictactoe.response.GameSimpleResponse;
 import com.apit.tictactoe.response.MoveResponse;
+import com.apit.tictactoe.response.StateResponse;
 import com.apit.tictactoe.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,9 @@ public class GameController {
             path="/game/{id}/state",
             produces="application/json"
     )
-    public GameSimpleResponse getState(@PathVariable(name="id") Long id)
+    public StateResponse getState(@PathVariable(name="id") Long id)
     {
-        return new GameSimpleResponse(gameService.getGamesById(id));
+        return new StateResponse(gameService.getGamesById(id));
     }
 
     @RequestMapping(
