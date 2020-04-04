@@ -36,10 +36,10 @@ public class MenuController {
             produces = "application/json"
     )
     public ResponseEntity<?> connectToGame(@RequestBody ConnectRequest connectRequest, @PathVariable(name="gameId") Long id){
-            if (connectRequest.getName()!="") {
+            if (connectRequest.getName().equals("")) {
                 GamesEntity gamesToConnect = gameService.getGamesById(id);
                 GamesEntity gameEdited = gamesToConnect.edit(connectRequest);
-                return ResponseEntity.ok(gameService.edit(gameEdited));
+                return ResponseEntity.ok(gameService.connect(gameEdited));
             }
             else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -51,7 +51,7 @@ public class MenuController {
             produces="application/json"
     )
     public ResponseEntity<?> createGame(@RequestBody Map<String, String> request){
-        if (request.get("name")!="")
+        if (request.get("name").equals(""))
         return ResponseEntity.ok(gameService.addGame(request.get("name")));
         else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
